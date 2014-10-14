@@ -54,7 +54,7 @@ var splashWindow = new UI.Window({
 var text = new UI.Text({
   position: new Vector2(0, 30),
   size: new Vector2(144, 40),
-  text:'Downloading weather data...',
+  text:'Downloading data...',
   font:'GOTHIC_28_BOLD',
   color:'black',
   textOverflow:'wrap',
@@ -65,7 +65,7 @@ var text = new UI.Text({
 splashWindow.add(text);
 splashWindow.show();
 
-// Make request to openweathermap.org
+// Make request
 ajax(
   {
 	url:'http://vps.rsopher.com/nutrition.json',

@@ -127,7 +127,8 @@ ajax(
 					
 					var detailCard = new UI.Card({
 						title:item['name'],
-						subtitle:item['calories'] + ' Cal'
+						subtitle:item['calories'] + ' Cal',
+						body:item['serving']
 					});
 					detailCard.show();
 				});

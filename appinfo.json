@@ -4,7 +4,7 @@
         ""
     ],
     "companyName": "Revan Sopher",
-    "longName": "Rutgers Dining",
+    "longName": "Rutgers",
     "projectType": "pebblejs",
     "resources": {
         "media": [
@@ -31,7 +31,7 @@
             }
         ]
     },
-    "shortName": "RU Dining",
+    "shortName": "Rutgers",
     "uuid": "4e990145-d77f-46ba-9aeb-ac1b28fd8977",
     "versionCode": 1,
     "versionLabel": "1.0",

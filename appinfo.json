@@ -37,5 +37,10 @@
     "versionLabel": "1.0",
     "watchapp": {
         "watchface": false
-    }
+    },
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "sdkVersion": "3"
 }

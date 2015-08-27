@@ -3,6 +3,16 @@ var UI = require('ui');
 var ajax = require('ajax');
 var Vector2 = require('vector2');
 
+// Make dummy request to wake up heroku
+ajax(
+	{
+		url:'http://runextbus.herokuapp.com/config',
+		type:'json'
+	},
+	function(data) {},
+	function(error) {}
+);
+
 //parses /config
 var parseRoutes = function(data) {
 	var items = [];
@@ -69,7 +79,7 @@ var parseItems = function(data, location, meal, genre) {
 
 // Show splash screen while waiting for data
 var splashWindow = new UI.Window({
-  backgroundColor:'white'
+  backgroundColor:'red'
 });
 
 // Text element to inform user
@@ -85,6 +95,7 @@ var text = new UI.Text({
 splashWindow.add(text);
 
 var mainMenu = new UI.Menu({
+	highlightBackgroundColor: 'red',
 	sections: [{
 		title:'Rutgers University',
 		items: [{
@@ -112,6 +123,7 @@ mainMenu.on('select', function(e) {
 
 			// Construct Menu to show to user
 			var locationMenu = new UI.Menu({
+			  highlightBackgroundColor: 'red',
 			  sections: [{
 				title: 'Locations',
 				items: locationItems
@@ -126,6 +138,7 @@ mainMenu.on('select', function(e) {
 				var mealItems = parseMeals(food_data, curLoc);
 
 				var mealMenu = new UI.Menu({
+					highlightBackgroundColor: 'red',
 					sections: [{
 						title: 'Meal',
 						items: mealItems
@@ -138,6 +151,7 @@ mainMenu.on('select', function(e) {
 					var genreItems = parseGenres(food_data, curLoc, curMeal);
 
 					var genreMenu = new UI.Menu({
+						highlightBackgroundColor: 'red',
 						sections: [{
 							title: 'Category',
 							items: genreItems
@@ -150,6 +164,7 @@ mainMenu.on('select', function(e) {
 						var itemItems = parseItems(food_data, curLoc, curMeal, curGenre);
 
 						var itemMenu = new UI.Menu({
+							highlightBackgroundColor: 'red',
 							sections: [{
 								title: 'Items',
 								items: itemItems
@@ -186,9 +201,9 @@ mainMenu.on('select', function(e) {
 		);
 	} else {
 		//Bus
-		//splashWindow.show();
+		splashWindow.show();
 
-		// Make request
+		// Make request for config.
 		ajax(
 		{
 			url:'http://runextbus.herokuapp.com/config',
@@ -197,6 +212,7 @@ mainMenu.on('select', function(e) {
 		function(data) {
 			var routeItems = parseRoutes(data);  
 			var routeMenu = new UI.Menu({
+				highlightBackgroundColor: 'red',
 				sections: [{
 					title: 'Routes',
 					items: routeItems
@@ -213,6 +229,7 @@ mainMenu.on('select', function(e) {
 						var stops = data;
 						var stopItems = parseStops(data)
 						var stopMenu = new UI.Menu({
+							highlightBackgroundColor: 'red',
 							sections: [{
 								title: 'Stops',
 								items: stopItems
@@ -239,8 +256,8 @@ mainMenu.on('select', function(e) {
 			});
 			
 			// Show the Menu, hide the splash
+			splashWindow.hide();
 			routeMenu.show();
-			//splashWindow.hide();
 		},
 		function(error) {
 			console.log("Download failed: " + error);

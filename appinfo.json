@@ -4,7 +4,7 @@
         ""
     ],
     "companyName": "Revan Sopher",
-    "longName": "Rutgers",
+    "longName": "Rutgers Bus and Dining",
     "projectType": "pebblejs",
     "resources": {
         "media": [
@@ -31,16 +31,13 @@
             }
         ]
     },
+    "sdkVersion": "3",
     "shortName": "Rutgers",
-    "uuid": "4e990145-d77f-46ba-9aeb-ac1b28fd8977",
+    "uuid": "6774d9aa-9497-4897-ac89-1e7d3170ad4b",
     "versionCode": 1,
     "versionLabel": "1.0",
     "watchapp": {
+        "hiddenApp": false,
         "watchface": false
-    },
-    "targetPlatforms": [
-        "aplite",
-        "basalt"
-    ],
-    "sdkVersion": "3"
+    }
 }

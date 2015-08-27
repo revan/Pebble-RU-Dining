@@ -140,7 +140,7 @@ mainMenu.on('select', function(e) {
 				var mealMenu = new UI.Menu({
 					highlightBackgroundColor: 'red',
 					sections: [{
-						title: 'Meal',
+						title: locationItems[curLoc].title,
 						items: mealItems
 					}]
 				});
@@ -153,7 +153,7 @@ mainMenu.on('select', function(e) {
 					var genreMenu = new UI.Menu({
 						highlightBackgroundColor: 'red',
 						sections: [{
-							title: 'Category',
+							title: mealItems[curMeal].title,
 							items: genreItems
 						}]
 					});
@@ -166,7 +166,7 @@ mainMenu.on('select', function(e) {
 						var itemMenu = new UI.Menu({
 							highlightBackgroundColor: 'red',
 							sections: [{
-								title: 'Items',
+								title: genreItems[curGenre].title,
 								items: itemItems
 							}]
 						});
@@ -177,7 +177,8 @@ mainMenu.on('select', function(e) {
 							var detailCard = new UI.Card({
 								title:item['name'],
 								subtitle:item['calories'] + ' Cal',
-								body:item['serving']
+								body:item['serving'],
+								scrollable: true
 							});
 							detailCard.show();
 						});
@@ -231,7 +232,7 @@ mainMenu.on('select', function(e) {
 						var stopMenu = new UI.Menu({
 							highlightBackgroundColor: 'red',
 							sections: [{
-								title: 'Stops',
+								title: 'Stops: ' + tag,
 								items: stopItems
 							}]
 						});
@@ -239,10 +240,10 @@ mainMenu.on('select', function(e) {
 							var stop = stops[e.itemIndex];
 							var body = "";
 							stop['predictions'].forEach(function(pred) {
-								body += pred['minutes'] + '\n';
+								body += pred['minutes'] + 'min\n';
 							});
 							var stopCard = new UI.Card({
-								title:stop['title'],
+								title:stop['title'] + ": " + tag,
 								body:body
 							});
 							stopCard.show();

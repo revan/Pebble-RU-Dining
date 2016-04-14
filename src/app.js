@@ -215,7 +215,7 @@ mainMenu.on('select', function(e) {
 							var detailCard = new UI.Card({
 								title:item['name'],
 								subtitle:item['calories'] + ' Cal',
-								body:item['serving'],
+								body:item['serving'] + '\n' + item['ingredients'].join('\n'),
 								scrollable: true
 							});
 							detailCard.show();
@@ -249,20 +249,20 @@ mainMenu.on('select', function(e) {
 			type:'json'
 		},
 		function(data) {
-			var routeItems = parseRoutes(data);  
-			var routeMenu = new UI.Menu({
-				highlightBackgroundColor: 'red',
-				sections: [{
-					title: '',
-					items: [{title:'Nearest'}]
-				},
-				{
-					title: 'Routes',
-					items: routeItems
-				}]
-			});
-			routeMenu.on('select', function(e) {
-				if (e.sectionIndex === 0) {
+// 			var routeItems = parseRoutes(data);  
+// 			var routeMenu = new UI.Menu({
+// 				highlightBackgroundColor: 'red',
+// 				sections: [{
+// 					title: '',
+// 					items: [{title:'Nearest'}]
+// 				},
+// 				{
+// 					title: 'Routes',
+// 					items: routeItems
+// 				}]
+// 			});
+// 			routeMenu.on('select', function(e) {
+// 				if (e.sectionIndex === 0) {
 					// get nearest
 					splashWindow.show();
 					navigator.geolocation.getCurrentPosition(
@@ -291,7 +291,8 @@ mainMenu.on('select', function(e) {
 										var route = routes[e.itemIndex];
 										var body = "";
 										route.predictions.forEach(function(pred) {
-											body += pred.minutes + 'min\n';
+											var est = new Date(new Date().getTime() + pred.seconds * 1000);
+											body += pred.minutes + 'min: ' + est.getHours() + ':' + est.getMinutes() + ':' + est.getSeconds() + '\n';
 										});
 										var stopCard = new UI.Card({
 											title:stop.title + ": " + route.title,
@@ -309,7 +310,8 @@ mainMenu.on('select', function(e) {
 							);
 						},
 						function(err) {
-							splashWindow.hide();
+							console.log(err);
+// 							splashWindow.hide();
 						},
 						{
 							enableHighAccuracy: true, 
@@ -317,48 +319,48 @@ mainMenu.on('select', function(e) {
 							timeout: 10000
 						}
 					);
-				} else {
-					// picking a route
-					var tag = data['active']['routes'][e.itemIndex]['tag'];
-					ajax(
-						{
-							url:'http://runextbus.herokuapp.com/route/'+tag,
-							type:'json'
-						},
-						function(data) {
-							var stops = data;
-							var stopItems = parseStops(data)
-							var stopMenu = new UI.Menu({
-								highlightBackgroundColor: 'red',
-								sections: [{
-									title: 'Stops: ' + tag,
-									items: stopItems
-								}]
-							});
-							stopMenu.on('select', function(e) {
-								var stop = stops[e.itemIndex];
-								var body = "";
-								stop['predictions'].forEach(function(pred) {
-									body += pred['minutes'] + 'min\n';
-								});
-								var stopCard = new UI.Card({
-									title:stop['title'] + ": " + tag,
-									body:body
-								});
-								stopCard.show();
-							});
-							stopMenu.show();
-						},
-						function(error) {
-							console.log("Download failed: " + error);
-						}
-					);
-				}
-			});
+// 				} else {
+// 					// picking a route
+// 					var tag = data['active']['routes'][e.itemIndex]['tag'];
+// 					ajax(
+// 						{
+// 							url:'http://runextbus.herokuapp.com/route/'+tag,
+// 							type:'json'
+// 						},
+// 						function(data) {
+// 							var stops = data;
+// 							var stopItems = parseStops(data)
+// 							var stopMenu = new UI.Menu({
+// 								highlightBackgroundColor: 'red',
+// 								sections: [{
+// 									title: 'Stops: ' + tag,
+// 									items: stopItems
+// 								}]
+// 							});
+// 							stopMenu.on('select', function(e) {
+// 								var stop = stops[e.itemIndex];
+// 								var body = "";
+// 								stop['predictions'].forEach(function(pred) {
+// 									body += pred['minutes'] + 'min\n';
+// 								});
+// 								var stopCard = new UI.Card({
+// 									title:stop['title'] + ": " + tag,
+// 									body:body
+// 								});
+// 								stopCard.show();
+// 							});
+// 							stopMenu.show();
+// 						},
+// 						function(error) {
+// 							console.log("Download failed: " + error);
+// 						}
+// 					);
+// 				}
+// 			});
 			
 			// Show the Menu, hide the splash
-			splashWindow.hide();
-			routeMenu.show();
+// 			splashWindow.hide();
+// 			routeMenu.show();
 		},
 		function(error) {
 			console.log("Download failed: " + error);

@@ -12,17 +12,17 @@
                 "file": "images/menu_icon.png",
                 "menuIcon": true,
                 "name": "IMAGE_MENU_ICON",
-                "type": "png"
+                "type": "bitmap"
             },
             {
                 "file": "images/logo_splash.png",
                 "name": "IMAGE_LOGO_SPLASH",
-                "type": "png"
+                "type": "bitmap"
             },
             {
                 "file": "images/tile_splash.png",
                 "name": "IMAGE_TILE_SPLASH",
-                "type": "png"
+                "type": "bitmap"
             },
             {
                 "file": "fonts/UbuntuMono-Regular.ttf",
@@ -33,6 +33,10 @@
     },
     "sdkVersion": "3",
     "shortName": "Rutgers",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
     "uuid": "6774d9aa-9497-4897-ac89-1e7d3170ad4b",
     "versionCode": 1,
     "versionLabel": "1.0",
